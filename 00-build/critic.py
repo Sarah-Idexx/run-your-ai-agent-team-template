@@ -6,26 +6,38 @@ The revision cap that stops a critic<->drafter loop lives in `agent.py`.
 from __future__ import annotations
 
 import json
+import re
+
+from claude_agent_sdk import ClaudeAgentOptions, ResultMessage, query
 
 from prompts import CRITIC_SYSTEM
 
 
-def review(client, model: str, proposed_output: str, source_data: str) -> dict:
+async def review(model: str, proposed_output: str, source_data: str) -> dict:
     """Return {"verdict": "pass"|"fail", "reasons": [...]} for a proposed output."""
-    resp = client.chat.completions.create(
+    options = ClaudeAgentOptions(
         model=model,
-        messages=[
-            {"role": "system", "content": CRITIC_SYSTEM},
-            {"role": "user", "content":
-                f"SOURCE DATA Cortex used:\n{source_data}\n\n"
-                f"CORTEX PROPOSED OUTPUT:\n{proposed_output}"},
-        ],
-        response_format={"type": "json_object"},
+        system_prompt=CRITIC_SYSTEM,
+        tools=[],              # the critic reads what it is given, it can do nothing
+        setting_sources=[],
+        max_turns=3,
     )
-    usage = resp.usage
+    prompt = (f"SOURCE DATA Cortex used:\n{source_data}\n\n"
+              f"CORTEX PROPOSED OUTPUT:\n{proposed_output}\n\n"
+              'Reply with ONLY a JSON object: {"verdict": "pass"|"fail", "reasons": [...]}')
+
+    text, cost = "", 0.0
+    async for message in query(prompt=prompt, options=options):
+        if isinstance(message, ResultMessage):
+            text = message.result or ""
+            cost = message.total_cost_usd or 0.0
+
     try:
-        verdict = json.loads(resp.choices[0].message.content)
-    except (json.JSONDecodeError, TypeError):
+        match = re.search(r"\{.*\}", text, re.DOTALL)
+        verdict = json.loads(match.group(0))
+        if verdict.get("verdict") not in ("pass", "fail"):
+            raise ValueError("bad verdict")
+    except (AttributeError, json.JSONDecodeError, ValueError):
         verdict = {"verdict": "fail", "reasons": ["critic returned unparseable output"]}
-    verdict["_usage"] = {"prompt": usage.prompt_tokens, "completion": usage.completion_tokens}
+    verdict["_cost"] = cost
     return verdict
