@@ -41,4 +41,4 @@ List every discrete decision or action in your agent's workflow, then score each
 
 ## Hardest call
 
-_Your toughest "above vs below" decision and how you resolved it. (Share this in `#cohort-channel`.)_
+**Decide tone and commitment level.** I first put this above the line, because tone should be determined by a human. I moved it below because it's easy to amend if it turns out to be wrong, and a human approves the draft before anything goes out. The deciding axis was **reversibility**: I can change it if it's incorrect.
