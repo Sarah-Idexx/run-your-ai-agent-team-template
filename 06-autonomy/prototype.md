@@ -21,12 +21,59 @@ Real screenshots of *your* Cortex running. These are the `00-build/CORTEX-ANATOM
 
 | # | Screenshot | What it shows | From |
 |---|---|---|---|
-| 1 | _[img]_ | happy-path run: a real drafted update + the HITL checkpoint (queued, not posted) | M2 |
+| 1 | Transcript below ("Module 2 capture: the happy path") | happy-path run: a real drafted update + the HITL checkpoint (queued, not posted) | M2 |
 | 2 | _[img]_ | the critic rejecting a bad draft (revise/block) | M3 |
 | 3 | _[img]_ | a grounded update citing pulled activity + a caught hallucination | M4 |
 | 4 | _[img]_ | jailbreak refused + escalated | M5 |
 | 5 | _[img]_ | an iteration/cost/queue bound halting a runaway | M5 |
 | 6 | _[img]_ | end-to-end run | M6 |
+
+### Module 2 capture: the happy path
+
+*Caption: a real happy-path run ends in **SUCCESS + HITL CHECKPOINT**. Cortex pulled the project, activity, past updates, roadmap and norms, drafted the update citing the pulled figures (PRs #820 and #823, activation 43% vs 41%), queued three stories under the 10-story cap, and the independent critic passed all five rules. The draft is held for a human and nothing was posted. This run used the refreshed stand-in sample data (invented PR titles and dates, not the official data pack) on the build with the five-rule critic.*
+
+```
+================================================================
+SUCCESS + HITL CHECKPOINT, status update + any proposed stories queued for your review. Nothing posted, no commitments made. Run cost ≈ $0.0045
+================================================================
+
+================================================================
+FINAL STATUS UPDATE (draft, validator-approved, NOT posted)
+================================================================
+DONE: Northstar (P-NORTH) weekly leadership update, queued for your review. Nothing has been posted or sent.
+
+**Draft update (matches the format of the 2026-10-12 and 2026-06-22 updates)**
+
+**Northstar (self-serve onboarding): GREEN**
+
+- **Shipped since last update:** Empty-state guidance for first-run screens (#820, merged 10-14). Contextual tips on checklist steps (#823, merged 10-16).
+- **Metric:** Activation rate is 43%, up from 41% week-over-week (as of 10-19).
+- **Open items:** Empty-state copy review (#818) is open at normal severity. It is the follow-up to #820.
+- **Watch:** The day-2 milestone email is in scope but has no recorded activity yet.
+- **Next:** Close out #818. Scope the day-2 milestone email for the next sprint.
+- **Dates:** None committed. No ship or GA date is included in this update.
+
+**Proposed Sprint 24 stories (queued for approval, nothing created in the tracker)**
+
+1. Build the day-2 milestone email (in scope per PRD-Northstar-v3) that prompts new self-serve users to their next onboarding step.
+2. Resolve open issue #818: finish review of first-run empty-state copy introduced in #820.
+3. Add a checklist drop-off view built on step-completion events, showing completion rate by step.
+
+The queue accepted all 3 stories, which is under the 10-story cap. Each one traces to an in-scope PRD item, and none touches the out-of-scope pricing work.
+
+**Data relied on**
+- Project P-NORTH: status on_track, no flags, sprint 24, PM is you, linked PRD-Northstar-v3.
+- Activity: PRs #812 (checklist UI, 06-29), #815 (step-completion events, 06-30), #820 (empty-state guidance, 10-14), #823 (contextual tips, 10-16). Open issue #818 (normal severity). Activation metric 43% vs 41% prior, as of 10-19.
+- No open Sev-1s and no launch hold were found.
+- Norms: the status update rules and backlog rules (10-story cap, in-scope PRD items only, no unconfirmed dates) were applied.
+- Past updates: 10-12 (green, 39% to 41%) and 06-22 (green, 37% to 39%) were used for format and tone.
+
+**Decisions for you**
+- Confirm the green rating. The day-2 email has no activity yet and may need a yellow call if it is not started this sprint.
+- Approve or edit the three stories above before sprint planning.
+
+Saved draft -> run-output/status-update-happy.md  (for your review, nothing was posted)
+```
 
 ### Module 2 captures: the escalate exit in the Loop Spec
 

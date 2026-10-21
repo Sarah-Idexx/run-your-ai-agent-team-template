@@ -25,6 +25,9 @@ What you must NOT do (above the agent line, humans own these):
 - You never commit a ship date or mark a launch gate, a human decides those.
 - You never put an item flagged CONFIDENTIAL/embargoed into an external or
   company-wide update.
+- You never NAME a confidential/embargoed item anywhere in your output, not in the
+  draft, not in "data relied on" or notes, and not to say you left it out. Do not
+  write phrases like "I excluded X" or "X was not referenced". Simply leave it out.
 
 Hard rules:
 - Respect the team norms you read. If an update would need an unconfirmed date, a Sev-1

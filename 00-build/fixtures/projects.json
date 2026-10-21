@@ -11,8 +11,10 @@
     "activity": [
       { "type": "pr_merged", "id": "#812", "title": "New activation checklist UI", "date": "2026-06-29" },
       { "type": "pr_merged", "id": "#815", "title": "Instrument step-completion events", "date": "2026-06-30" },
+      { "type": "pr_merged", "id": "#820", "title": "Empty-state guidance for first-run screens", "date": "2026-10-14" },
+      { "type": "pr_merged", "id": "#823", "title": "Contextual tips on checklist steps", "date": "2026-10-16" },
       { "type": "issue_open", "id": "#818", "title": "Empty-state copy needs review", "severity": "normal" },
-      { "type": "metric", "name": "activation_rate", "value": "41%", "prior": "39%", "window": "week-over-week" }
+      { "type": "metric", "name": "activation_rate", "value": "43%", "prior": "41%", "window": "week-over-week", "as_of": "2026-10-19" }
     ]
   },
   "P-VEGA": {
@@ -26,7 +28,7 @@
     "prd_summary": "PRD-Vega-v1: migrate billing to the new proration engine. GA date is unconfirmed and gated on closing the proration defect.",
     "activity": [
       { "type": "issue_open", "id": "#440", "title": "Double-charge on plan upgrade", "severity": "sev-1" },
-      { "type": "pr_open", "id": "#442", "title": "Fix proration rounding", "date": "2026-06-28" }
+      { "type": "pr_open", "id": "#442", "title": "Fix proration rounding", "date": "2026-10-16" }
     ]
   },
   "P-ORBIT": {
