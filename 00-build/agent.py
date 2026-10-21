@@ -53,7 +53,7 @@ except ImportError:
 # --- Bounds (your M5 deliverable: tune these and justify them) ----------------
 MODEL = os.environ.get("CORTEX_MODEL", "claude-haiku-5-5")
 MAX_ITERATIONS = int(os.environ.get("CORTEX_MAX_ITERATIONS", "8"))
-MAX_REVISIONS = int(os.environ.get("CORTEX_MAX_REVISIONS", "2"))
+MAX_REVISIONS = int(os.environ.get("CORTEX_MAX_REVISIONS", "0"))  # 0: a critic fail escalates
 COST_CAP_USD = float(os.environ.get("CORTEX_COST_CAP_USD", "0.50"))
 MAX_QUEUE_ITEMS = int(os.environ.get("CORTEX_MAX_QUEUE_ITEMS", "10"))
 MAX_TOOL_FAILURES = int(os.environ.get("CORTEX_MAX_TOOL_FAILURES", "3"))
@@ -283,12 +283,14 @@ async def run(which: str = "happy") -> None:
                 return
 
             if revisions >= MAX_REVISIONS:
-                reason = f"validator rejected {MAX_REVISIONS}x (revision cap)"
-                banner(f"STUCK, {reason}. Stopping instead of looping. "
-                       f"Run cost ≈ ${bounds.cost:.4f}")
-                emit_deliverable(which, last_draft, outcome="STUCK", reason=reason,
-                                 cost=bounds.cost,
-                                 tried=[f"critic rejected: {verdict['reasons']}"])
+                # Fail-action = escalate (Orchestration Map, field 5): the critic's
+                # rejection goes to a human with the reasons, not back into a loop.
+                reason = ("critic rejected the draft "
+                          f"(revision cap {MAX_REVISIONS}): " + " | ".join(verdict["reasons"]))
+                banner(f"ESCALATE, the critic rejected the draft. A human takes it from "
+                       f"here. Run cost ≈ ${bounds.cost:.4f}")
+                emit_deliverable(which, last_draft, outcome="ESCALATE", reason=reason,
+                                 cost=bounds.cost)
                 return
 
             if bounds.over_cap():

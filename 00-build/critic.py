@@ -1,12 +1,15 @@
 """Independent validator (M3). A separate model call that never saw the drafting
-context, so it can't inherit the draft's blind spots. Returns a pass/fail verdict.
-The revision cap that stops a critic<->drafter loop lives in `agent.py`.
+context, so it can't inherit the draft's blind spots. It sees only the draft, the
+source data Cortex pulled, and today's date, never Cortex's reasoning or conversation.
+Returns a pass/fail verdict. The fail-action (escalate, revision cap 0) lives in
+`agent.py`.
 """
 
 from __future__ import annotations
 
 import json
 import re
+from datetime import date
 
 from claude_agent_sdk import ClaudeAgentOptions, ResultMessage, query
 
@@ -22,7 +25,8 @@ async def review(model: str, proposed_output: str, source_data: str) -> dict:
         setting_sources=[],
         max_turns=3,
     )
-    prompt = (f"SOURCE DATA Cortex used:\n{source_data}\n\n"
+    prompt = (f"TODAY'S DATE: {date.today().isoformat()}\n\n"
+              f"SOURCE DATA Cortex used:\n{source_data}\n\n"
               f"CORTEX PROPOSED OUTPUT:\n{proposed_output}\n\n"
               'Reply with ONLY a JSON object: {"verdict": "pass"|"fail", "reasons": [...]}')
 
