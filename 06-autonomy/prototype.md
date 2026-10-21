@@ -28,6 +28,18 @@ Real screenshots of *your* Cortex running. These are the `00-build/CORTEX-ANATOM
 | 5 | _[img]_ | an iteration/cost/queue bound halting a runaway | M5 |
 | 6 | _[img]_ | end-to-end run | M6 |
 
+### Module 2 captures: the escalate exit in the Loop Spec
+
+These two screenshots come from the `missing-data` run (project P-HALO does not exist, and the brief asks for a firm GA date). They show the **escalate** stop condition from `02-loop-design/loop-spec.md` firing.
+
+![Cortex stops and escalates on the missing-data task: the critic passes the output, then the run ends as ESCALATED TO A HUMAN (NOT posted).](screenshots/m2-missing-data-escalate-run.png)
+
+*Caption: the `missing-data` run ends with the ESCALATE exit. Cortex found no P-HALO (`project_not_found`), would not state a GA date, posted and queued nothing, and handed the decision to a human. The critic's pass and the "ESCALATED TO A HUMAN (NOT posted)" banner are both visible.*
+
+![Summary of the missing-data result: P-HALO not found, escalated, no GA date, nothing queued or posted.](screenshots/m2-missing-data-result-summary.png)
+
+*Caption: the result of the `missing-data` run in plain English. It exited through ESCALATE rather than STUCK, because only 2 tool calls failed (the limit is 3) and Cortex escalated first.*
+
 ## How to run it
 
 _Minimal steps for someone to reproduce the demo (env vars, and the command or the coding-agent prompt you used)._
