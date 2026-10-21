@@ -61,4 +61,8 @@ A plain in-process hand-off. No MCP or A2A protocol is used. Cortex hands the cr
 
 ## 7. Cost & latency budget
 
-_Coordination has a price. Rough token/latency cost of the fleet vs a single agent. (Forward-link to M5 bounds.)_
+- **Extra model calls:** the critic adds **1** call per draft. With a revision cap of 0, the worst case is also 1 per run.
+- **Measured cost:** about $0.0004 per critic call, out of about $0.003 for a whole run (the SDK's estimate, not a bill on a subscription).
+- **Added latency:** about 8 seconds before a draft reaches the PM, in a run of about 19 seconds.
+- **Budget ceiling:** a run may cost up to **$0.50**, which matches the build's current cost cap.
+- **Bound for M5:** at most 1 critic call per draft, and a per-run cost cap of $0.50.
