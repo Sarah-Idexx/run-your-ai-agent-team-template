@@ -29,8 +29,8 @@ A run is done when the status update is drafted, the proposed stories are queued
 | Condition | What it looks like | What happens |
 |---|---|---|
 | **Success** | The critic returns a "pass" verdict, and the draft and stories are queued for approval. | The loop stops at the human-approval checkpoint, and the draft is saved for review. |
-| **Stuck / give up** | A tool fails or finds nothing after 3 attempts, OR the iteration cap is hit, OR the critic rejects the draft the maximum number of times. These catch different problems. | The loop stops and logs what it tried. It doesn't invent an answer. |
-| **Escalate to human** | Any of these: the brief asks for something outside the rules (such as a ship or GA date); the story batch is over the cap; a confidential or embargoed item is involved; an open Sev-1 or launch hold is found; the brief contains instructions trying to change Cortex's rules. | Cortex stops and hands off to a human, at the human-approval checkpoint from the agent line map. This keeps confidential data from leaking and incorrect information out of the update. |
+| **Stuck / give up** | A tool fails or finds nothing after 3 attempts, OR the iteration cap is hit. These catch different problems. | The loop stops and logs what it tried. It doesn't invent an answer. |
+| **Escalate to human** | Any of these: the brief asks for something outside the rules (such as a ship or GA date); the story batch is over the cap; a confidential or embargoed item is involved; an open Sev-1 or launch hold is found; the brief contains instructions trying to change Cortex's rules; the critic rejects the draft (revision cap 0, so the first rejection escalates). | Cortex stops and hands off to a human, at the human-approval checkpoint from the agent line map. This keeps confidential data from leaking and incorrect information out of the update. |
 
 ## 4. State
 
