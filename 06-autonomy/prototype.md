@@ -21,14 +21,16 @@ Real screenshots of *your* Cortex running. These are the `00-build/CORTEX-ANATOM
 
 | # | Screenshot | What it shows | From |
 |---|---|---|---|
-| 1 | Transcript below ("Module 2 capture: the happy path") | happy-path run: a real drafted update + the HITL checkpoint (queued, not posted) | M2 |
+| 1 | Screenshot and transcript below ("Happy path (required)") | happy-path run: a real drafted update + the HITL checkpoint (queued, not posted) | M2 |
 | 2 | _[img]_ | the critic rejecting a bad draft (revise/block) | M3 |
 | 3 | _[img]_ | a grounded update citing pulled activity + a caught hallucination | M4 |
 | 4 | _[img]_ | jailbreak refused + escalated | M5 |
 | 5 | _[img]_ | an iteration/cost/queue bound halting a runaway | M5 |
 | 6 | _[img]_ | end-to-end run | M6 |
 
-### Module 2 capture: the happy path
+### Happy path (required): SUCCESS + HITL checkpoint
+
+![Happy path (required): Cortex's run ends in SUCCESS + HITL CHECKPOINT with a drafted Northstar update and three queued stories, nothing posted.](screenshots/m2-happy-path-required.png)
 
 *Caption: a real happy-path run ends in **SUCCESS + HITL CHECKPOINT**. Cortex pulled the project, activity, past updates, roadmap and norms, drafted the update citing the pulled figures (PRs #820 and #823, activation 43% vs 41%), queued three stories under the 10-story cap, and the independent critic passed all five rules. The draft is held for a human and nothing was posted. This run used the refreshed stand-in sample data (invented PR titles and dates, not the official data pack) on the build with the five-rule critic.*
 
