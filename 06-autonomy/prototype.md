@@ -84,6 +84,10 @@ ESCALATED TO A HUMAN (NOT posted)
 
 *Caption: Claude Code's summary of the same forced-failure run. The critic caught all five planted violations and escalated to a human because the revision cap is 0. The run also exposed a stale `.env` setting (`CORTEX_MAX_REVISIONS=2`) that overrode the new default, which was found and fixed.*
 
+![Module 3 done-check: all six items ticked, followed by the debrief text.](screenshots/m3-done-check.png)
+
+*Caption: Module 3 done-check, all items complete. The orchestration map has all seven fields, the critic reflects the five rules, the critic-rejection evidence is captured, and everything is committed and pushed.*
+
 ## How to run it
 
 _Minimal steps for someone to reproduce the demo (env vars, and the command or the coding-agent prompt you used)._
