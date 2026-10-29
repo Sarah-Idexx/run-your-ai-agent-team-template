@@ -6,14 +6,14 @@
 
 ## What it does
 
-_One paragraph: the agent in action, end to end._
+Cortex is a PM chief-of-staff agent. It pulls project state, engineering activity, team norms and past updates, drafts the weekly leadership update, and proposes next-sprint stories (up to 10) from the PRD. An independent critic checks the draft. The run ends at a human checkpoint: nothing is posted, no dates are committed, and stories are only queued for approval.
 
 ## How you built it
 
-- **Coding agent:** _which one you directed (Claude Code / Cursor / Codex)_
-- **Model + bounds:** _model used, max iterations, cost cap, queue cap_
-- **Repo / config:** _path to your build in `00-build/`_
-- **Live link:** _[shareable URL, optional bonus]_
+- **Coding agent:** Claude Code
+- **Model + bounds:** `claude-haiku-5-5`, max 8 iterations, $0.05 per run cost cap, 10-story queue cap
+- **Repo / config:** `00-build/`
+- **Live link:** none
 
 ## Screenshots (required, collected M2 to M6)
 
@@ -22,11 +22,11 @@ Real screenshots of *your* Cortex running. These are the `00-build/CORTEX-ANATOM
 | # | Screenshot | What it shows | From |
 |---|---|---|---|
 | 1 | Screenshot and transcript below ("Happy path (required)") | happy-path run: a real drafted update + the HITL checkpoint (queued, not posted) | M2 |
-| 2 | _[img]_ | the critic rejecting a bad draft (revise/block) | M3 |
+| 2 | `screenshots/m3-critic-rejection-summary.png` | the critic rejecting a bad draft (revise/block) | M3 |
 | 3 | Transcripts below ("Module 4 captures: grounding") | a grounded update citing pulled activity + a withheld-source case where Cortex refuses instead of inventing | M4 |
-| 4 | _[img]_ | jailbreak refused + escalated | M5 |
-| 5 | _[img]_ | an iteration/cost/queue bound halting a runaway | M5 |
-| 6 | _[img]_ | end-to-end run | M6 |
+| 4 | `screenshots/m5-jailbreak-refusal.png` | jailbreak refused + escalated | M5 |
+| 5 | `screenshots/m5-bound-trip.png` | an iteration/cost/queue bound halting a runaway | M5 |
+| 6 | `screenshots/m6-end-to-end.png` | end-to-end run | M6 |
 
 ### Happy path (required): SUCCESS + HITL checkpoint
 
@@ -198,3 +198,9 @@ _Minimal steps for someone to reproduce the demo (env vars, and the command or t
 *Caption: `CORTEX_MAX_ITERATIONS=2` halts the run after two tool calls with "STUCK, max iterations (2) reached". The draft is held, nothing is posted, and no cost runaway occurs.*
 
 **Reflection.** When the cap trips, the human sees STUCK in the terminal, with details of what was tried. Thankfully nothing was posted and Cortex didn't continue. The bound I'd tune next is the STUCK message: it should give more context on how to fix it.
+
+### Module 6 capture: end to end
+
+![End-to-end happy path: SUCCESS + HITL CHECKPOINT with a drafted Northstar update (Yellow, proposed), 3 stories queued for approval, nothing posted.](screenshots/m6-end-to-end.png)
+
+*Caption: end-to-end run on the current data pack. Cortex pulled project, activity, norms and past updates, drafted the weekly update, and queued 3 of 10 stories for approval. Because the newest activity is from July, it proposed **Yellow** instead of Green and asked a human to confirm. The critic approved it, nothing was posted, no dates were committed, and the run cost about $0.005.*
